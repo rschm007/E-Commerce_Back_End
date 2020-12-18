@@ -18,7 +18,7 @@ Product.init(
     },
     {
       product_name: DataTypes.STRING,
-      price: DataTypes.INTEGER,
+      price: DataTypes.DECIMAL(10, 2),
       stock: DataTypes.INTEGER,
       references: {
         model: 'Category',
