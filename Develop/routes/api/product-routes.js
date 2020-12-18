@@ -9,8 +9,14 @@ router.get('/', async (req, res) => {
     const productData = await Product.findAll({
       // including its associated Category and Tag data
       include: [
-        { model: Category, through: Product, as: "product_category" },
-        { model: Tag, as: "tag_id" },    
+        { 
+          model: Category,
+          attributes: ['category_name'],
+        },
+        { 
+          model: Tag,
+          attributes: ['tag_name']
+        },    
       ],
     });
 
@@ -26,8 +32,14 @@ router.get('/:id', async (req, res) => {
     const productData = await Product.findByPk(req.params.id, {
       // including its associated Category and Tag data
       include: [
-        { model: Category, through: Product, as: "product_category" },
-        { model: Tag, as: "tag_id" },    
+        { 
+          model: Category,
+          attributes: ['category_name'],
+        },
+        { 
+          model: Tag,
+          attributes: ['tag_name']
+        },       
       ],
     });
 
@@ -115,7 +127,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   // delete a product by its `id` value
   try {
-    const productData = await Category.destroy({
+    const productData = await Product.destroy({
       where: {
         id: req.params.id,
       },
