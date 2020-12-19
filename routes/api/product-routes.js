@@ -1,56 +1,54 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
 // GET all products
-router.get('/', async (req, res) => {
-  try {
-    const productData = await Product.findAll({
-      // including its associated Category and Tag data
-      include: [
-        { 
-          model: Category,
-          attributes: ['category_name'],
-        },
-        { 
-          model: Tag,
-          attributes: ['tag_name']
-        },    
-      ],
+router.get("/", (req, res) => {
+  Product.findAll({
+    // including its associated Category and Tag data
+    include: [
+      {
+        model: Category,
+        attributes: ["category_name"],
+      },
+      {
+        model: Tag,
+        attributes: ["tag_name"],
+      },
+    ],
+  })
+    .then((productData) => res.json(productData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
-
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 // GET one product
-router.get('/:id', async (req, res) => {
-  try {
-    const productData = await Product.findByPk(req.params.id, {
-      // including its associated Category and Tag data
-      include: [
-        { 
-          model: Category,
-          attributes: ['category_name'],
-        },
-        { 
-          model: Tag,
-          attributes: ['tag_name']
-        },       
-      ],
+router.get("/:id", (req, res) => {
+  Product.findByPk(req.params.id, {
+    // including its associated Category and Tag data
+    include: [
+      {
+        model: Category,
+        attributes: ["category_name"],
+      },
+      {
+        model: Tag,
+        attributes: ["tag_name"],
+      },
+    ],
+  })
+    .then((productData) => res.json(productData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
-
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -82,7 +80,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -124,7 +122,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE a producct
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   // delete a product by its `id` value
   try {
     const productData = await Product.destroy({
