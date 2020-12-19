@@ -4,14 +4,14 @@ const { Category, Product } = require("../../models");
 // The `/api/categories` endpoint
 
 // GET all categories
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const categoryData = await Category.findAll({
       // including its associated Category and Tag data
       include: [
-        { 
+        {
           model: Product,
-          attributes: ['product_name'],
+          attributes: ["product_name"],
         },
       ],
     });
@@ -21,14 +21,14 @@ router.get('/', async (req, res) => {
   }
 });
 // GET a single category
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id, {
       // including its associated Category and Tag data
       include: [
-        { 
+        {
           model: Product,
-          attributes: ['category_id'],
+          attributes: ["category_id"],
         },
       ],
     });
@@ -52,19 +52,20 @@ router.post("/", async (req, res) => {
 // UPDATE a category
 router.put("/:id", async (req, res) => {
   try {
-  // update a category by its `id` value
-  Category.update({
-    category_name: req.body.category_name,
-  },
-  {
-    where: {
-      id: req.params.id,
-    }
+    // update a category by its `id` value
+    Category.update(
+      {
+        category_name: req.body.category_name,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+  } catch (err) {
+    res.status(400).json(err);
   }
-  );
-} catch (err) {
-  res.status(400).json(err);
-}
 });
 
 // DELETE category by id
