@@ -26,11 +26,13 @@ A working Express.js API connected to a MySQL database that allows POST, GET, DE
 
 To install this project you will need to use MySQL and a text editor like Visual Studio Code. You will also need node.js to install the npm packages via npm install.
 
+<strong>Example Video:</strong> <a href="https://drive.google.com/file/d/1stNyw8xZfpIZtkFXdfCl4EGcK_7C4-7a/view">https://drive.google.com/file/d/1stNyw8xZfpIZtkFXdfCl4EGcK_7C4-7a/view</a>
 
 # Usage
 
 To initialize the project, create a database called ecommerce_db in mysql workbench. You can then type node seeds/index.js to easily seed the database. Initialize the server with npm start, and then use an API tester like Insomnia or Postman to test your API requests.
 
+<img src="https://raw.githubusercontent.com/rschm007/E-Commerce_Back_End/main/assets/demo_gif1.gif" alt="app demo gif" style="max-width:100%;">
 
 # Contribute
 
